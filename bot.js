@@ -4,9 +4,9 @@ const bot = new TelegramBot(token, { polling: true });
 
 // Links array
 let scheduleLink = [
-    'https://i.imgur.com/5WyHjD8.jpeg', // 6Y8 [0]
-    '', // 7Y9 [1]
-    'imgur.com', // 8Y10 [2]
+    'https://imgur.com/a/hock87f', // 6Y8 [0]
+    'https://imgur.com/a/9rh6uod', // 7Y9 [1]
+    'https://imgur.com/a/WdFNtw7', // 8Y10 [2] 
     'imgur.com', // 9Y11 [3]
     'https://i.imgur.com/Uvigbqn.jpg' // School breaks [4]
 ];
