@@ -4,9 +4,9 @@ const bot = new TelegramBot(token, { polling: true });
 
 // Links array
 let scheduleLink = [
-    'https://i.imgur.com/pKS40JT.jpg', // 6Y8 [0]
-    'https://i.imgur.com/Kf0gcLm.jpg', // 7Y9 [1]
-    'https://i.imgur.com/d1yIFXh.jpg', // 8Y10 [2] 
+    'i.imgur.com/pKS40JT.jpg', // 6Y8 [0]
+    'i.imgur.com/Kf0gcLm.jpg', // 7Y9 [1]
+    'i.imgur.com/d1yIFXh.jpg', // 8Y10 [2] 
     'imgur.com', // 9Y11 [3]
     'https://i.imgur.com/Uvigbqn.jpg' // School breaks [4]
 ];
@@ -24,9 +24,7 @@ bot.onText(/\/schedule (.+)/, (msg, match) => {
         bot.sendPhoto(chatID, scheduleLink[2], { caption: `Ваше расписание для ${scheduleYear} класса` });
     } else if (scheduleYear == 9) {
         bot.sendPhoto(chatID, scheduleLink[3], { caption: `Ваше расписание для ${scheduleYear} класса` });
-    } else {
-        bot.sendMessage(chatID, 'К сожаления для вашего класса нет расписания, но вы можете воспользоваться другими функциями.')
-    };
+    }
 });
 
 // School Calendar
@@ -35,4 +33,24 @@ bot.onText(/\/breaks/, (msg) => {
 
     bot.sendPhoto(chatID, scheduleLink[4], { caption: `Расписание каникул` });
 });
-  
+
+// INLINE Keyboard
+let menu = {
+    "parse_mode": "Markdown",
+    "reply_markup": JSON.stringify({
+      "keyboard": [
+        [{ text: "6Y8" }],
+        [{ text: "7Y9" }],
+        [{ text: "8Y10" }],
+        [{ text: "9Y11" }],
+        [{ text: "Каникулы" }]
+      ]
+    })
+};
+
+// bot.onText(/\/calendar/, (msg, match) => {
+//     bot.sendMessage(msg.chat.id, 'Выберите любую кнопку:', menu);
+// });
+bot.on('message', (msg) => {
+        bot.sendMessage(msg.chat.id, 'Выберите любую кнопку:', menu);
+});
