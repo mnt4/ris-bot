@@ -48,9 +48,6 @@ let menu = {
     })
 };
 
-// bot.onText(/\/calendar/, (msg, match) => {
-//     bot.sendMessage(msg.chat.id, 'Выберите любую кнопку:', menu);
-// });
-bot.on('message', (msg) => {
-        bot.sendMessage(msg.chat.id, 'Выберите любую кнопку:', menu);
+bot.onText(/\/menu/, (msg, match) => {
+    bot.sendMessage(msg.chat.id, 'Выберите любую кнопку:', menu);
 });
