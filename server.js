@@ -35,18 +35,18 @@ bot.onText(/\/breaks/, (msg) => {
 });
 
 // INLINE Keyboard
-var options = {
+let options = {
     reply_markup: JSON.stringify({
         inline_keyboard: [
             [{ text: '6Y8', callback_data: '6' }],
             [{ text: '7Y9', callback_data: '7' }],
-            [{ text: '8Y10', callback_data: '8' }]
-            [{ text: '9Y11', callback_data: '9' }]
+            [{ text: '8Y10', callback_data: '8' }],
+            [{ text: '9Y11', callback_data: '9' }],
             [{ text: 'Каникулы', callback_data: 'Holidays' }]
         ]
     })
 };
 
-bot.onText(/\/calendar/, function(msg, match) {
+bot.onText(/\/calendar/, (msg, match) => {
     bot.sendMessage(msg.chat.id, 'Выберите любую кнопку:', options);
 });
