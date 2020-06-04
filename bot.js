@@ -1,6 +1,7 @@
 const TelegramBot = require('node-telegram-bot-api');
 const token = '1165478309:AAG3eJBpBrVC3l8CvPjsERo-ISmxXyaE1kU';
 const bot = new TelegramBot(token, { polling: true });
+const schedule = require('node-schedule');
 
 // Links array
 let scheduleLink = [
@@ -44,11 +45,11 @@ bot.on('message', (msg, match) => {
         bot.sendPhoto(chatID, scheduleLink[3], { caption: `Ваше расписание для ${msgContent} класса` });
     } else if (msgContent == 'Каникулы') {
         bot.sendPhoto(chatID, scheduleLink[4], { caption: `Расписание каникул` });
-    }
+    };
 });
 
 // Error handler
 bot.on('error', msg => {
     const chatID = msg.chat.id;
     bot.sendMessage(chatID, 'Произошла ошибка, пожалуйста перешлите это сообщение @tsunami_lost')
-})
+});
