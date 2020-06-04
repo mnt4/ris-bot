@@ -4,50 +4,51 @@ const bot = new TelegramBot(token, { polling: true });
 
 // Links array
 let scheduleLink = [
-    'i.imgur.com/pKS40JT.jpg', // 6Y8 [0]
-    'i.imgur.com/Kf0gcLm.jpg', // 7Y9 [1]
-    'i.imgur.com/d1yIFXh.jpg', // 8Y10 [2] 
+    'https://i.imgur.com/pKS40JT.jpg', // 6Y8 [0]
+    'https://i.imgur.com/Kf0gcLm.jpg', // 7Y9 [1]
+    'https://i.imgur.com/d1yIFXh.jpg', // 8Y10 [2] 
     'imgur.com', // 9Y11 [3]
     'https://i.imgur.com/Uvigbqn.jpg' // School breaks [4]
 ];
 
-// Schedules
-bot.onText(/\/schedule (.+)/, (msg, match) => {
-    const chatID = msg.chat.id;
-    const scheduleYear = match[1];
-
-    if (scheduleYear == 6) {
-        bot.sendPhoto(chatID, scheduleLink[0], { caption: `Ваше расписание для ${scheduleYear} класса` });
-    } else if (scheduleYear == 7) {
-        bot.sendPhoto(chatID, scheduleLink[1], { caption: `Ваше расписание для ${scheduleYear} класса` });
-    } else if (scheduleYear == 8) {
-        bot.sendPhoto(chatID, scheduleLink[2], { caption: `Ваше расписание для ${scheduleYear} класса` });
-    } else if (scheduleYear == 9) {
-        bot.sendPhoto(chatID, scheduleLink[3], { caption: `Ваше расписание для ${scheduleYear} класса` });
-    }
-});
-
-// School Calendar
-bot.onText(/\/breaks/, (msg) => {
-    const chatID = msg.chat.id;
-
-    bot.sendPhoto(chatID, scheduleLink[4], { caption: `Расписание каникул` });
-});
-
-// INLINE Keyboard
+// Keyboard Menu
 let menu = {
-    "parse_mode": "Markdown",
-    "reply_markup": JSON.stringify({
-      "keyboard": [
-        [{ text: "6Y8" }],
-        [{ text: "7Y9" }],
-        [{ text: "8Y10" }],
-        [{ text: "9Y11" }],
-        [{ text: "Каникулы" }]
+    'parse_mode': 'Markdown',
+    'reply_markup': JSON.stringify({
+      'keyboard': [
+        [{ text: '6Y8' }],
+        [{ text: '7Y9' }],
+        [{ text: '8Y10' }],
+        [{ text: '9Y11' }],
+        [{ text: 'Каникулы' }]
       ]
     })
 };
 
 bot.onText(/\/menu/, (msg, match) => {
-    bot.sendMessage(msg.chat.id, 'Выберите любую кнопку:', menu);
+    bot.sendMessage(msg.chat.id, 'Выберите ваш класс:', menu);
 });
+
+// Menu command handler
+bot.on('message', (msg, match) => {
+    const chatID = msg.chat.id;
+    const msgContent = msg.text;
+
+    if (msgContent == '6Y8') {
+        bot.sendPhoto(chatID, scheduleLink[0], { caption: `Ваше расписание для ${msgContent} класса` });
+    } else if (msgContent == '7Y9') {
+        bot.sendPhoto(chatID, scheduleLink[1], { caption: `Ваше расписание для ${msgContent} класса` });
+    } else if (msgContent == '8Y10') {
+        bot.sendPhoto(chatID, scheduleLink[2], { caption: `Ваше расписание для ${msgContent} класса` });
+    } else if (msgContent == '9Y10') {
+        bot.sendPhoto(chatID, scheduleLink[3], { caption: `Ваше расписание для ${msgContent} класса` });
+    } else if (msgContent == 'Каникулы') {
+        bot.sendPhoto(chatID, scheduleLink[4], { caption: `Расписание каникул` });
+    }
+});
+
+// Error handler
+bot.on('error', msg => {
+    const chatID = msg.chat.id;
+    bot.sendMessage(chatID, 'Произошла ошибка, пожалуйста перешлите это сообщение @tsunami_lost')
+})
