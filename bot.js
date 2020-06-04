@@ -24,7 +24,9 @@ bot.onText(/\/schedule (.+)/, (msg, match) => {
         bot.sendPhoto(chatID, scheduleLink[2], { caption: `Ваше расписание для ${scheduleYear} класса` });
     } else if (scheduleYear == 9) {
         bot.sendPhoto(chatID, scheduleLink[3], { caption: `Ваше расписание для ${scheduleYear} класса` });
-    } 
+    } else {
+        bot.sendMessage(chatID, 'К сожаления для вашего класса нет расписания, но вы можете воспользоваться другими функциями.')
+    };
 });
 
 // School Calendar
