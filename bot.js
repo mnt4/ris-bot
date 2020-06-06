@@ -48,7 +48,7 @@ bot.on('message', (msg, match) => {
         bot.sendPhoto(chatID, scheduleLink[1], { caption: `Ваше расписание для ${msgContent} класса` });
     } else if (msgContent == '8Y10') {
         bot.sendPhoto(chatID, scheduleLink[2], { caption: `Ваше расписание для ${msgContent} класса` });
-    } else if (msgContent == '9Y10') {
+    } else if (msgContent == '9Y11') {
         bot.sendPhoto(chatID, scheduleLink[3], { caption: `Ваше расписание для ${msgContent} класса` });
     } else if (msgContent == 'Каникулы') {
         bot.sendPhoto(chatID, scheduleLink[4], { caption: `Расписание каникул` });
