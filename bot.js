@@ -30,6 +30,13 @@ bot.onText(/\/menu/, (msg, match) => {
     bot.sendMessage(msg.chat.id, 'Выберите ваш класс:', menu);
 });
 
+// Welcome message
+bot.onText(/\/start/, msg => {
+    const chatID = msg.chat.id
+    bot.sendMessage(chatID, '**Привет!**\nДанный бот поможет узнать расписание для вашего класса и уточнить, когда начнутся каникулы. Выберете ваш класс внизу:', menu)
+});
+
+
 // Menu command handler
 bot.on('message', (msg, match) => {
     const chatID = msg.chat.id;
