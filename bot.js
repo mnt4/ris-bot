@@ -5,10 +5,10 @@ const schedule = require('node-schedule');
 
 // Links array
 let scheduleLink = [
-    'https://i.imgur.com/pKS40JT.jpg', // 6Y8 [0]
-    'https://i.imgur.com/Kf0gcLm.jpg', // 7Y9 [1]
-    'https://i.imgur.com/d1yIFXh.jpg', // 8Y10 [2] 
-    'imgur.com', // 9Y11 [3]
+    'https://i.imgur.com/it81WD1.png', // 6Y8 [0]
+    'https://i.imgur.com/PROIjTb.png', // 7Y9 [1]
+    'https://i.imgur.com/MFKsT7e.png', // 8Y10 [2] 
+    'https://i.imgur.com/vWHiHvj.png', // 9Y11 [3]
     'https://i.imgur.com/Uvigbqn.jpg' // School breaks [4]
 ];
 
