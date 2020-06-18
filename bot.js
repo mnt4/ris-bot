@@ -26,9 +26,6 @@ let menu = {
     })
 };
 
-bot.onText(/\/menu/, (msg, match) => {
-    bot.sendMessage(msg.chat.id, 'Выберите ваш класс:', menu);
-});
 
 // Welcome message
 bot.onText(/\/start/, msg => {
@@ -38,7 +35,7 @@ bot.onText(/\/start/, msg => {
 
 
 // Menu command handler
-bot.on('message', (msg, match) => {
+bot.on('message', (msg,) => {
     const chatID = msg.chat.id;
     const msgContent = msg.text;
 
