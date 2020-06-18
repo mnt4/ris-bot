@@ -1,5 +1,5 @@
 const TelegramBot = require('node-telegram-bot-api');
-const token = '1165478309:AAG3eJBpBrVC3l8CvPjsERo-ISmxXyaE1kU';
+const token = '928155173:AAGzSBXDC_FW2P5c8yjnuLVY0TduFtXO_e4';
 const bot = new TelegramBot(token, { polling: true });
 const schedule = require('node-schedule');
 
@@ -41,7 +41,7 @@ bot.on('message', (msg, match) => {
         bot.sendPhoto(chatID, scheduleLink[1], { caption: `Ваше расписание для ${msgContent} класса` });
     } else if (msgContent == '8Y10') {
         bot.sendPhoto(chatID, scheduleLink[2], { caption: `Ваше расписание для ${msgContent} класса` });
-    } else if (msgContent == '9Y10') {
+    } else if (msgContent == '9Y11') {
         bot.sendPhoto(chatID, scheduleLink[3], { caption: `Ваше расписание для ${msgContent} класса` });
     } else if (msgContent == 'Каникулы') {
         bot.sendPhoto(chatID, scheduleLink[4], { caption: `Расписание каникул` });
@@ -53,3 +53,44 @@ bot.on('error', msg => {
     const chatID = msg.chat.id;
     bot.sendMessage(chatID, 'Произошла ошибка, пожалуйста перешлите это сообщение @tsunami_lost')
 });
+
+// Schedule (Reminders)
+
+//var rule = new schedule.RecurrenceRule();
+//rule.dayOfWeek = [0, new schedule.Range(2, 6)];
+//rule.hour = 14;
+//rule.minute = 15;
+
+//schedule.scheduleJob(rule, function(msg){
+//    const ChatID = msg.chat.id;
+//    bot.sendMessage(ChatID, 'test')
+//});
+
+//schedule.scheduleJob({hour: 14, minute: 20, dayOfWeek: 4}, function(msg) {
+ //   console.log(msg)
+ //   const chatID = msg.chat.id;
+ //   bot.sendMessage(chatID, 'a')
+ // });
+
+
+//var notes = [];
+
+//bot.onText(/напомни (.+) в (.+)/, function (msg, match) {
+//    var userId = msg.from.id;
+//    var text = match[1];
+//    var time = match[2];
+
+//    notes.push({ 'uid': userId, 'time': time, 'text': text });
+
+//    bot.sendMessage(userId, 'Отлично! Я обязательно напомню');
+//});
+
+//setInterval(function(){
+//    for (var i = 0; i < notes.length; i++) {
+//    const curDate = new Date().getHours() + ':' + new Date().getMinutes();
+//    if (notes[i]['time'] === curDate) {
+//      bot.sendMessage(notes[i]['uid'], 'Напоминаю, что вы должны: '+ notes[i]['text'] + ' сейчас.');
+//      notes.splice(i, 1);
+//    }
+//  }
+//}, 1000);
