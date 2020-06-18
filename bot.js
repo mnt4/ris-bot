@@ -1,5 +1,6 @@
 const TelegramBot = require('node-telegram-bot-api');
-const token = '928155173:AAGzSBXDC_FW2P5c8yjnuLVY0TduFtXO_e4';
+// const token = '928155173:AAGzSBXDC_FW2P5c8yjnuLVY0TduFtXO_e4'; // Test token
+const token = '1165478309:AAG3eJBpBrVC3l8CvPjsERo-ISmxXyaE1kU'; // Main token
 const bot = new TelegramBot(token, { polling: true });
 const cron = require('node-cron');
 // Links array
@@ -21,11 +22,21 @@ let menu = {
         [{ text: '8Y10' }],
         [{ text: '9Y11' }],
         [{ text: 'Каникулы' }],
-        ["Отключить Напоминания", "Включить напоминания"]
+        [{ text: 'Напоминания'}],
       ]
     })
 };
 
+let remindmenu = {
+    'parse_mode': 'Markdown',
+    'reply_markup': JSON.stringify({
+      'keyboard': [
+        [{ text: 'Включить напоминания ⏰' }],
+        [{ text: 'Отключить напоминания ❌' }],
+        [{ text: 'Назад ↩️' }],
+      ]
+    })
+};
 
 
 // Welcome message
@@ -49,6 +60,10 @@ bot.on('message', (msg, match) => {
         bot.sendPhoto(chatID, scheduleLink[3], { caption: `Ваше расписание для ${msgContent} класса` });
     } else if (msgContent == 'Каникулы') {
         bot.sendPhoto(chatID, scheduleLink[4], { caption: `Расписание каникул` });
+    } else if (msgContent == 'Напоминания') {
+        bot.sendMessage(chatID, 'Включить или выключить напоминания о начале урока:', remindmenu)
+    } else if (msgContent == 'Назад ↩️') {
+        bot.sendMessage(chatID, 'Выберете ваш класс внизу:', menu)
     };
 });
 
@@ -58,13 +73,11 @@ bot.on('error', msg => {
     bot.sendMessage(chatID, 'Произошла ошибка, пожалуйста перешлите это сообщение @tsunami_lost')
 });
 
+
 // Schedule (Reminders)
-
-
-
-bot.onText(/Включить напоминания/, (msg, match) => {                                //on reminders
-var userId = msg.from.id
-bot.sendMessage(msg.chat.id, 'Напоминания были успешно включены.');
+bot.onText(/Включить напоминания ⏰/, msg => {                                //on reminders
+    var userId = msg.from.id
+    bot.sendMessage(msg.chat.id, 'Напоминания были успешно включены.');
     const schedule = cron.schedule('35 8 * * 1-5', (msg, match) => {
         bot.sendMessage(userId, 'Доброе Утро, ваш урок начнется через 5 минут')        //1-й урок [0]
     
@@ -91,7 +104,7 @@ bot.sendMessage(msg.chat.id, 'Напоминания были успешно в�
       }, null, true, 'Europe/Moscow');
     schedule, schedule1, schedule2, schedule3, schedule4.start
 
-    bot.onText(/Отключить Напоминания/ , (msg, match) => {
+    bot.onText(/Отключить напоминания ❌/ , (msg, match) => {
         schedule, schedule1, schedule2, schedule3, schedule4.stop();            //off reminders
         bot.sendMessage(msg.chat.id, 'Напоминания были успешно отключены.');
     });
