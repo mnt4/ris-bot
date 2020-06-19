@@ -42,7 +42,7 @@ let remindmenu = {
 // Welcome message
 bot.onText(/\/start/, msg => {
     const chatID = msg.chat.id
-    bot.sendMessage(chatID, '**Привет!**\nДанный бот поможет узнать расписание для вашего класса и уточнить, когда начнутся каникулы. Выберете ваш класс внизу:', menu)
+    bot.sendMessage(chatID, '**Привет!**\nДанный бот поможет узнать расписание для вашего класса, уточнить, когда начнутся каникулы и даже напомнит о начале урока. Выберете ваш класс внизу:', menu)
 });
 
 
@@ -80,7 +80,7 @@ bot.onText(/Включить напоминания ⏰/, msg => {              
     var userId = msg.from.id
     bot.sendMessage(msg.chat.id, 'Напоминания были успешно включены.');
     const schedule = cron.schedule('35 8 * * 1-5', (msg, match) => {
-        bot.sendMessage(userId, 'Доброе Утро, ваш урок начнется через 5 минут')        //1-й урок [0]
+        bot.sendMessage(userId, 'Доброе утро, ваш урок начнется через 5 минут')        //1-й урок [0]
     
       }, null, true, 'Europe/Moscow');
 
@@ -99,14 +99,14 @@ bot.onText(/Включить напоминания ⏰/, msg => {              
     
       }, null, true, 'Europe/Moscow');
 
-      const schedule4 = cron.schedule('55 14 * * 1-5', (msg, match) => {
+      const schedule4 = cron.schedule('39 15 * * 1-5', (msg, match) => {
         bot.sendMessage(userId, 'Последний урок начнется через 5 минут')        //5-й урок [4]
     
       }, null, true, 'Europe/Moscow');
     schedule, schedule1, schedule2, schedule3, schedule4.start
 
     bot.onText(/Отключить напоминания ❌/ , (msg, match) => {
-        schedule, schedule1, schedule2, schedule3, schedule4.stop();            //off reminders
+        schedule, schedule1, schedule2, schedule3, schedule4.destroy();            //off reminders
         bot.sendMessage(msg.chat.id, 'Напоминания были успешно отключены.');
     });
 });
