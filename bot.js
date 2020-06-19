@@ -1,8 +1,8 @@
 const TelegramBot = require('node-telegram-bot-api');
-// const token = '928155173:AAGzSBXDC_FW2P5c8yjnuLVY0TduFtXO_e4'; // Test token
 const token = '1165478309:AAG3eJBpBrVC3l8CvPjsERo-ISmxXyaE1kU'; // Main token
 const bot = new TelegramBot(token, { polling: true });
 const cron = require('node-cron');
+
 // Links array
 let scheduleLink = [
     'https://i.imgur.com/it81WD1.png', // 6Y8 [0]
@@ -99,7 +99,7 @@ bot.onText(/Включить напоминания ⏰/, msg => {              
     
       }, null, true, 'Europe/Moscow');
 
-      const schedule4 = cron.schedule('39 15 * * 1-5', (msg, match) => {
+      const schedule4 = cron.schedule('55 14 * * 1-5', (msg, match) => {
         bot.sendMessage(userId, 'Последний урок начнется через 5 минут')        //5-й урок [4]
     
       }, null, true, 'Europe/Moscow');
@@ -110,9 +110,3 @@ bot.onText(/Включить напоминания ⏰/, msg => {              
         bot.sendMessage(msg.chat.id, 'Напоминания были успешно отключены.');
     });
 });
-
-
-
-
-
-
