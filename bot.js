@@ -119,7 +119,7 @@ bot.onText(/Включить напоминания ⏰/, msg => {              
     schedule, schedule1, schedule2, schedule3, schedule4.start();
 });
 
-bot.onText(/Отключить напоминания ❌/ , (msg, match) => {
+bot.onText(/Отключить напоминания ❌/, msg => {
         schedule, schedule1, schedule2, schedule3, schedule4.stop();            //off reminders
         bot.sendMessage(msg.chat.id, 'Напоминания были успешно отключены.');
 });
