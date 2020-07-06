@@ -74,52 +74,54 @@ bot.on('error', msg => {
     bot.sendMessage(chatID, 'Произошла ошибка, пожалуйста перешлите это сообщение @tsunami_lost')
 });
 
+// Schedule library
+const schedule = cron.schedule('0 35 8 * * 1-5', msg => {
+  bot.sendMessage(msg.chat.id, 'Доброе утро, ваш урок начнется через 5 минут')        //1-й урок [0]
+
+}, {
+  scheduled: true,
+  timezone: 'Europe/Moscow'
+});
+
+const schedule1 = cron.schedule('0 15 10 * * 1-5', msg => {
+  bot.sendMessage(msg.chat.id, 'Ваш урок начнется через 5 минут')        //2-й урок [1]
+
+}, {
+  scheduled: true,
+  timezone: 'Europe/Moscow'
+});
+
+const schedule2 = cron.schedule('0 45 11 * * 1-5', msg => {
+bot.sendMessage(msg.chat.id, 'Ваш урок начнется через 5 минут')        //3-й урок [2]
+}, {
+scheduled: true,
+timezone: 'Europe/Moscow'
+});
+
+const schedule3 = cron.schedule('0 25 13 * * 1-5', msg => {
+bot.sendMessage(msg.chat.id, 'Ваш урок начнется через 5 минут')        //4-й урок [3]
+}, {
+scheduled: true,
+timezone: 'Europe/Moscow'
+});
+
+const schedule4 = cron.schedule('0 55 14 * * 1-5', msg => {
+bot.sendMessage(msg.chat.id, 'Последний урок начнется через 5 минут')        //5-й урок [4]
+}, {
+scheduled: true,
+timezone: 'Europe/Moscow'
+});
 
 // Schedule (Reminders)
 bot.onText(/Включить напоминания ⏰/, msg => {                                //on reminders
     var userId = msg.from.id
     bot.sendMessage(msg.chat.id, 'Напоминания были успешно включены.');
-    const schedule = cron.schedule('0 35 8 * * 1-5', (msg, match) => {
-        bot.sendMessage(userId, 'Доброе утро, ваш урок начнется через 5 минут')        //1-й урок [0]
-    
-      }, {
-        scheduled: true,
-        timezone: 'Europe/Moscow'
-      });
-
-    const schedule1 = cron.schedule('0 15 10 * * 1-5', (msg, match) => {
-        bot.sendMessage(userId, 'Ваш урок начнется через 5 минут')        //2-й урок [1]
-    
-      }, {
-        scheduled: true,
-        timezone: 'Europe/Moscow'
-      });
-
-    const schedule2 = cron.schedule('0 45 11 * * 1-5', (msg, match) => {
-      bot.sendMessage(userId, 'Ваш урок начнется через 5 минут')        //3-й урок [2]
-    }, {
-      scheduled: true,
-      timezone: 'Europe/Moscow'
-    });
-
-    const schedule3 = cron.schedule('0 25 13 * * 1-5', (msg, match) => {
-      bot.sendMessage(userId, 'Ваш урок начнется через 5 минут')        //4-й урок [3]
-    }, {
-      scheduled: true,
-      timezone: 'Europe/Moscow'
-    });
-
-    const schedule4 = cron.schedule('0 55 14 * * 1-5', (msg, match) => {
-      bot.sendMessage(userId, 'Последний урок начнется через 5 минут')        //5-й урок [4]
-    }, {
-      scheduled: true,
-      timezone: 'Europe/Moscow'
-    });
-
     schedule, schedule1, schedule2, schedule3, schedule4.start();
 });
 
 bot.onText(/Отключить напоминания ❌/, msg => {
-        schedule, schedule1, schedule2, schedule3, schedule4.stop();            //off reminders
-        bot.sendMessage(msg.chat.id, 'Напоминания были успешно отключены.');
+      schedule, schedule1, schedule2, schedule3, schedule4.stop();            //off reminders
+      bot.sendMessage(msg.chat.id, 'Напоминания были успешно отключены.');
 });
+
+bot.on("polling_error", (err) => console.log(err));
