@@ -79,34 +79,47 @@ bot.on('error', msg => {
 bot.onText(/Включить напоминания ⏰/, msg => {                                //on reminders
     var userId = msg.from.id
     bot.sendMessage(msg.chat.id, 'Напоминания были успешно включены.');
-    const schedule = cron.schedule('35 8 * * 1-5', (msg, match) => {
+    const schedule = cron.schedule('0 35 8 * * 1-5', (msg, match) => {
         bot.sendMessage(userId, 'Доброе утро, ваш урок начнется через 5 минут')        //1-й урок [0]
     
-      }, null, true, 'Europe/Moscow');
+      }, {
+        scheduled: true,
+        timezone: 'Europe/Moscow'
+      });
 
-    const schedule1 = cron.schedule('15 10 * * 1-5', (msg, match) => {
+    const schedule1 = cron.schedule('0 15 10 * * 1-5', (msg, match) => {
         bot.sendMessage(userId, 'Ваш урок начнется через 5 минут')        //2-й урок [1]
     
-      }, null, true, 'Europe/Moscow');
+      }, {
+        scheduled: true,
+        timezone: 'Europe/Moscow'
+      });
 
-      const schedule2 = cron.schedule('45 11 * * 1-5', (msg, match) => {
-        bot.sendMessage(userId, 'Ваш урок начнется через 5 минут')        //3-й урок [2]
-    
-      }, null, true, 'Europe/Moscow');
-
-      const schedule3 = cron.schedule('25 13 * * 1-5', (msg, match) => {
-        bot.sendMessage(userId, 'Ваш урок начнется через 5 минут')        //4-й урок [3]
-    
-      }, null, true, 'Europe/Moscow');
-
-      const schedule4 = cron.schedule('55 14 * * 1-5', (msg, match) => {
-        bot.sendMessage(userId, 'Последний урок начнется через 5 минут')        //5-й урок [4]
-    
-      }, null, true, 'Europe/Moscow');
-    schedule, schedule1, schedule2, schedule3, schedule4.start
-
-    bot.onText(/Отключить напоминания ❌/ , (msg, match) => {
-        schedule, schedule1, schedule2, schedule3, schedule4.destroy();            //off reminders
-        bot.sendMessage(msg.chat.id, 'Напоминания были успешно отключены.');
+    const schedule2 = cron.schedule('0 45 11 * * 1-5', (msg, match) => {
+      bot.sendMessage(userId, 'Ваш урок начнется через 5 минут')        //3-й урок [2]
+    }, {
+      scheduled: true,
+      timezone: 'Europe/Moscow'
     });
+
+    const schedule3 = cron.schedule('0 25 13 * * 1-5', (msg, match) => {
+      bot.sendMessage(userId, 'Ваш урок начнется через 5 минут')        //4-й урок [3]
+    }, {
+      scheduled: true,
+      timezone: 'Europe/Moscow'
+    });
+
+    const schedule4 = cron.schedule('0 55 14 * * 1-5', (msg, match) => {
+      bot.sendMessage(userId, 'Последний урок начнется через 5 минут')        //5-й урок [4]
+    }, {
+      scheduled: true,
+      timezone: 'Europe/Moscow'
+    });
+
+    schedule, schedule1, schedule2, schedule3, schedule4.start();
+});
+
+bot.onText(/Отключить напоминания ❌/ , (msg, match) => {
+        schedule, schedule1, schedule2, schedule3, schedule4.stop();            //off reminders
+        bot.sendMessage(msg.chat.id, 'Напоминания были успешно отключены.');
 });
