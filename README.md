@@ -12,4 +12,4 @@ Welcome to the Russian International School Telegram bot.
 This is an educational Node.js project powered by ☕ coffee, [Telegram API](https://core.telegram.org/bots/api) and [node-telegram-bot-api](https://github.com/yagop/node-telegram-bot-api).
 
 
-Proudly coded by @mnt4 and @Horunu under the support of WH Development.
+Proudly coded by [@mnt4](https://github.com/mnt4) and [@Horunu](https://github.com/Horunu) under the support of WH Development.
