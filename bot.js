@@ -4,7 +4,7 @@ require('dotenv-flow').config();
 const config = {
   token: process.env.TOKEN,
 };
-const bot = new TelegramBot(token, { polling: true });
+const bot = new TelegramBot(config.token, { polling: true });
 
 // Links array
 let scheduleLink = [
