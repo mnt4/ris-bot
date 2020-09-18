@@ -1,7 +1,10 @@
 const TelegramBot = require('node-telegram-bot-api');
-const token = '1165478309:AAG3eJBpBrVC3l8CvPjsERo-ISmxXyaE1kU'; // Main token
-const bot = new TelegramBot(token, { polling: true });
 const cron = require('node-cron');
+require('dotenv-flow').config();
+const config = {
+  token: process.env.TOKEN,
+};
+const bot = new TelegramBot(token, { polling: true });
 
 // Links array
 let scheduleLink = [
